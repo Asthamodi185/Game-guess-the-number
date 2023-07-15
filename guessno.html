@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game : Guess the number</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(132, 199, 193);
+
+        }
+
+        #container {
+            display: inline-block;
+text-align: center;
+        }
+
+        #container h1 {
+            color: white;
+            background-color: rgb(19, 93, 92);
+            text-transform: uppercase;
+            font-family: monospace;
+            padding: 2%;
+            font-size: 30px;
+        }
+
+        #container p {
+            font-family: cursive;
+            font-size: 20px;
+            margin: 1% auto;
+        }
+
+        #container>p>span {
+            font-family: monospace;
+            font-weight: 900;
+            text-decoration: underline;
+        }
+
+        input[value="play game"] {
+            background-color: yellow;
+            font-size: 20px;
+            padding: 1% 2%;
+            border-radius: 20px;
+            margin: 2%;
+            border: 1px solid black;
+        }
+
+        input[id="num"] {
+            width: 20%;
+            padding: 2%;
+            font-size: 20px;
+            background-color: rgb(231, 243, 246);
+            color: black;
+            margin: 1% 6%;
+            border: 1px solid black;
+        }
+
+        input[id="check"] {
+            background-color: rgb(33, 105, 33);
+            color: white;
+            font-size: 20px;
+            padding: 1% 2%;
+            border: 1px solid black;
+        }
+
+        input[id="playagain"] {
+            background-color: blue;
+            color: white;
+            border: 1px solid black;
+            border-radius: 20px;
+            font-size: 20px;
+            color: white;
+            padding: 1% 2%;
+        }
+
+        #count {
+            background-color: red;
+            padding: 0.5% 1%;
+            border-radius: 20px;
+        }
+
+        #mybox,
+        #playagain {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Guess the number</h1>
+        <p><span>The Game </span> : guess the number increase your mental ability to think and solve any problem.</p>
+        <p> <span>How to play</span> : In this game the computer will generate a random number, and you have to guess
+            the number. In
+            the input box you can enter a number, the computer will give you a clue about number.Let's check in how
+            many guesses you won the game.
+            <br>ALL THE BEST!
+        </p>
+        <input type="button" value="play game" onclick="play()">
+        <div id="mybox">
+            <input type="number" id="num"><input type="button" value="check number" id="check">
+
+            <p>Your total guesses are <span id="count">0</span></p>
+            <p id="msg"></p>
+
+        </div>
+        
+                <input type="button" value="playagain" id="playagain" onclick="window.location.reload(true)" ;>
+
+
+    </div>
+
+    <script>
+
+        let msg = document.getElementById("msg");
+
+        let num = document.getElementById("num");
+        let mybox = document.getElementById('mybox');
+        let check = document.getElementById('check');
+        let count = document.getElementById('count');
+        let playagain = document.getElementById('playagain');
+        let i = 0;
+        function play() {
+
+            const random = parseInt(Math.random() * 100);
+            mybox.style.display = "block";
+
+            check.addEventListener('click', () => {
+                i++;
+                count.innerHTML = i;
+                let val = parseInt(num.value);
+                console.log(val);
+                if (val < random) {
+                    msg.innerHTML = "CLUE : your enter number is less than the random number";
+                }
+                else if (val > random) {
+                    msg.innerHTML = " CLUE : your enter number is greater than the random number";
+                }
+                else if (val == random) {
+                    let score = 101 - i;
+                    msg.innerHTML = " CONGRATULATION !you won the game." + "<br>" + "Your total score is " + score;
+
+                    playagain.style.display = "inline-block";
+                }
+                else {
+                    msg.innerHTML = "please... enter a number";
+                }
+
+
+            })
+
+        }
+
+
+    </script>
+</body>
+
+</html>
